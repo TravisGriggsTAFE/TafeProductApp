@@ -44,9 +44,14 @@ namespace ProductApps
                 decimal wrapCharge = 5.00m;
                 decimal totalChargeAfterWrap = cProduct.TotalPayment + deliveryCharge + wrapCharge;
 
+                // Add the GST charge
+                decimal gst = (cProduct.TotalPayment + deliveryCharge + wrapCharge) * 0.10m;
+                decimal totalChargeAfterGST = totalChargeAfterWrap + gst;
+
                 // Display total charge
                 totalChargeTextBlock.Text = totalCharge.ToString("C");  // Format as currency
                 totalChargeAfterWrapTextBlock.Text = totalChargeAfterWrap.ToString("C");  // Format as currency
+                totalChargeAfterGSTTextBlock.Text = totalChargeAfterGST.ToString("C");  // Total with GST included
             }
             catch (FormatException)
             {
@@ -62,6 +67,7 @@ namespace ProductApps
             totalPaymentTextBlock.Text = "";
             totalChargeTextBlock.Text = "";
             totalChargeAfterWrapTextBlock.Text = "";
+            totalChargeAfterGSTTextBlock.Text = "";
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
